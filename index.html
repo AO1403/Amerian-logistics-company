@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Package Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #0a74da;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0a74da;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #085bb5;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eef6ff;
+            border-left: 4px solid #0a74da;
+        }
+        .error {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffeaea;
+            border-left: 4px solid #d83a3a;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Package Tracking</h1>
+</header>
+
+<div class="container">
+    <h3>Enter your tracking number</h3>
+    <input type="text" id="trackingNumber" placeholder="e.g. ABC123456" />
+    <button onclick="trackPackage()">Track Package</button>
+
+    <div id="output"></div>
+</div>
+
+<script>
+    // Example mock database (replace with real API later)
+    const database = {
+        "DDF37445122": {
+            status: "In Transit",
+            lastLocation: "Florida Distributing CO LLC (Miller lite)",
+            expectedDelivery: "2025-11-20"
+        },
+        "XYZ987654": {
+            status: "Delivered",
+            lastLocation: "Front Door",
+            expectedDelivery: "Delivered Today"
+        }
+    };
+
+    function trackPackage() {
+        const code = document.getElementById("trackingNumber").value.trim();
+        const output = document.getElementById("output");
+        output.innerHTML = "";
+
+        if (!code) {
+            output.innerHTML = `<div class="error">Please enter a tracking number.</div>`;
+            return;
+        }
+
+        const info = database[code];
+
+        if (info) {
+            output.innerHTML = `
+                <div class="result">
+                    <strong>Status:</strong> ${info.status}<br>
+                    <strong>Last Location:</strong> ${info.lastLocation}<br>
+                    <strong>Expected Delivery:</strong> ${info.expectedDelivery}
+                </div>
+            `;
+        } else {
+            output.innerHTML = `<div class="error">Tracking number not found.</div>`;
+        }
+    }
+</script>
+
+</body>
+</html>
