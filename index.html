@@ -81,7 +81,9 @@
         "DDF37445122": {
             status: "In Transit",
             lastLocation: "New York Distribution Center, NY",
-            expectedDelivery: "05-15-2026"
+            expectedDeliveryDate: "05-15-2026"
+            deliveryAddress: "153 Chemung Road
+Meredith, NH 03253
         },
         "XYZ987654": {
             status: "Delivered",
@@ -107,7 +109,8 @@
                 <div class="result">
                     <strong>Status:</strong> ${info.status}<br>
                     <strong>Last Location:</strong> ${info.lastLocation}<br>
-                    <strong>Expected Delivery:</strong> ${info.expectedDelivery}
+                    <strong>Expected Delivery:</strong> ${info.expectedDeliveryDate}
+                    <strong>Delivery Address:</strong> ${info.deliveryAddress}
                 </div>
             `;
         } else {
